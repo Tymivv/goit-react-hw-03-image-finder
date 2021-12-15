@@ -46,7 +46,11 @@ class App extends Component {
     try {
       const newArticles = await fetchData(image, page);
       this.setState(prevState => ({
-        articles: [...prevState.articles, ...newArticles.hits],
+        articles:
+          prevState.image !== image
+            ? [...prevState.articles, ...newArticles.hits]
+            : [...newArticles.hits],
+        // articles: [...prevState.articles, ...newArticles.hits],
       }));
       return newArticles.hits;
     } catch (error) {
